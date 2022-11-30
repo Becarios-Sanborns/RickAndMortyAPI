@@ -1,0 +1,41 @@
+<div class="container">
+<table class="table">
+    <thead>
+      <tr>
+        <th *ngFor="let clientes of thHead" scope="col">{{clientes}}</th>
+      </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let character of arregloPaginado[paginaActual-1]">
+          <td><img src={{character.imagen}}></td>
+          <td>{{character.index}}</td>
+          <td>{{character.nombre}}</td>
+          <td>{{character.estado}}</td>
+          <td>{{character.especie}} / {{character.tipo}}</td>
+        </tr>
+    </tbody>
+
+  </table>
+
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+
+      <li class="page-item">
+        <a class="page-link" (click)="inicioPagina()"><<</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" (click)="anteriorPagina()"><</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" (click)="siguientePagina()">></a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" (click)="ultimaPagina()">>></a>
+      </li>
+
+    </ul>
+  </nav>
+
+ 
+</div>

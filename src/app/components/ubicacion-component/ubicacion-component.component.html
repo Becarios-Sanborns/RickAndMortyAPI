@@ -1,0 +1,37 @@
+<div class="container">
+    <table class="table">
+        <thead>
+          <tr>
+            <th *ngFor="let titulo of titulosTabla" scope="col">{{titulo}}</th>
+          </tr>
+        </thead>
+    
+        <tbody>
+            <tr *ngFor="let datos of arregloPaginado[paginaActual-1]">
+              <td>{{datos.id}}</td>
+              <td>{{datos.name}}</td>
+              <td>{{datos.type}} / {{datos.dimention}}</td>
+              <td>{{datos.created}}</td> 
+            </tr>
+        </tbody>
+      </table>
+    
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item">
+            <a class="page-link" (click)="inicioPagina()"><<</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" (click)="anteriorPagina()"><</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" (click)="siguientePagina()">></a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" (click)="ultimaPagina()">>></a>
+          </li>
+        </ul>
+      </nav>
+    
+     
+    </div>

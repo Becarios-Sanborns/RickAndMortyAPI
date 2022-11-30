@@ -1,0 +1,19 @@
+.form-label {
+    font-family:cursive;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.form-control {
+    width: 13em;
+    font-family:'Times New Roman', Times, serif;
+    font-size: 1.1em;
+    background-color: rgba(238, 117, 184, 0.685);
+    color: white;
+    margin-left: 35px;
+}
+
+.container {
+    margin: 0px 0px;
+}
+
