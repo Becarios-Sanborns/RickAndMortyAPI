@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ObjetoDatos } from 'src/app/interface/objeto-datos';
 import { RickMortyService } from 'src/app/services/RickMorty.service';
 
 @Component({
@@ -12,76 +13,46 @@ export class ListaComponent implements OnInit {
   thHead:string[] = ['Image','#','Name','Status','Species / Type']; 
   personajes:any[] = [];
   arregloPaginado:any[] = [];
+  arregloObjeto:ObjetoDatos[]=[];
+
+  interfaceObjeto!:ObjetoDatos;
   
   paginaActual = 1;
   totalPorPagina = 5;
   paginasEnTotal = 0;
 
-  constructor(private serviceRM: RickMortyService, private activeRouter:ActivatedRoute) { }
+  constructor(private serviceRM: RickMortyService) { }
 
   ngOnInit(): void {
     this.getPersonajes();
-    this.filtrarTexto();
+    this.filtrarPersonaje();
   }
 
   getPersonajes(){
-    let caracteristicasPersonaje;
+   let caracteristicasPersonaje;
       for(let i=1;i<=50;i++){
-
         this.serviceRM.getPersonajes(i).subscribe(response =>{
           caracteristicasPersonaje = {
             imagen: response.image,
             index: i,
-            nombre: response.name,
+            name: response.name,
             estado: response.status,
             especie: response.species,
             tipo: response.type
           }
             this.personajes.push(caracteristicasPersonaje);
             this.paginasEnTotal = Math.ceil(this.personajes.length/this.totalPorPagina);
-            this.arregloPaginado = this.segmentarArreglo();
+            this.arregloPaginado = this.serviceRM.dividirArreglo(this.personajes);
         });
     }
   }
 
-  segmentarArreglo(){
-    let array = [];
-    for(let i=0;i<this.personajes.length;i+=this.totalPorPagina){
-      array.push(this.personajes.slice(i,i+this.totalPorPagina));
-    }
-    return array;
-  }
-
- 
-
-  filtrarTexto(){
+  filtrarPersonaje(){
     this.serviceRM.textoObservable.subscribe(res => {
-      console.log("texto",res);
-      for(let i=1;i<=50;i++){
-        this.serviceRM.filterCharacters(i,res).subscribe(objeto => {
-            try{
-                if(objeto.name.includes(res)){
-                  console.log("objeto",objeto);
-                }
-              }catch(error){}  
-        });
-      }
+      console.log("textoP",res);  
+      this.arregloPaginado = this.serviceRM.filtrarPorTexto(this.personajes,res);
     });
   }
-
-/*  filtrar(){
-    for(let i=1;i<=50;i++){
-      this.serviceRM.filterCharacters(i,this.mensaje).subscribe(res => {
-       try{
-          if(res.name.includes(this.mensaje)){
-            console.log("pp",res);
-          }
-        }catch(error){
-          console.log(error);
-        }  
-  });
-  }
-  }*/
 
   /*================================================*/
   inicioPagina(){
@@ -109,3 +80,21 @@ export class ListaComponent implements OnInit {
   }
  
 }
+
+/*for(let i=1;i<=50;i++){
+        this.serviceRM.filterCharacters(i,res).subscribe(objeto => {
+                if(objeto.name.includes(res)){
+
+                    this.interfaceObjeto = {
+                      index: i,
+                      nombre:objeto.name,
+                      estado:objeto.status,
+                      especie:objeto.species,
+                      tipo: objeto.type
+                    }
+
+                   console.log(this.interfaceObjeto);
+
+                }
+        });
+      }*/

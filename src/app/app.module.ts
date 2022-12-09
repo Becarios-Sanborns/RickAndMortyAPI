@@ -9,7 +9,6 @@ import { BuscadorComponent } from './components/buscador/buscador.component';
 import { AppRoutingModule } from './app-routing.module';
 import { UbicacionComponentComponent } from './components/ubicacion-component/ubicacion-component.component';
 import { EpisodiosComponentComponent } from './components/episodios-component/episodios-component.component';
-import { EjemploComponent } from './ejemplo/ejemplo.component';
 
 
 @NgModule({
@@ -19,8 +18,7 @@ import { EjemploComponent } from './ejemplo/ejemplo.component';
     ListaComponent,
     BuscadorComponent,
     UbicacionComponentComponent,
-    EpisodiosComponentComponent,
-    EjemploComponent
+    EpisodiosComponentComponent
   ],
   imports: [
     BrowserModule,

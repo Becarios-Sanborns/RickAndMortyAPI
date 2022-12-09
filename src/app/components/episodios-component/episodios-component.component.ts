@@ -12,10 +12,11 @@ export class EpisodiosComponentComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEpisodiosAPI();
+    this.filtrarEpisodios();
   }
 
   tituloTabla = ['#','Name','Episode','Air date','Total characters'];
-  arrayEpisodios:any[] = [];
+  episodios:any[] = [];
   arregloPaginado:any[] = [];
 
   paginaActual = 1;
@@ -33,22 +34,19 @@ export class EpisodiosComponentComponent implements OnInit {
           airDate: response.air_date,
           personajes: response.characters.length
         }
-          this.arrayEpisodios.push(detallesEpisodio);
-          this.paginasEnTotal = Math.ceil(this.arrayEpisodios.length/this.totalPorPagina);
-          this.arregloPaginado = this.segmentarArreglo();
+          this.episodios.push(detallesEpisodio);
+          this.paginasEnTotal = Math.ceil(this.episodios.length/this.totalPorPagina);
+          this.arregloPaginado = this.servicio.dividirArreglo(this.episodios);
       });
     }
   }
 
-  segmentarArreglo(){
-    let array = [];
-
-    for(let i=0;i<this.arrayEpisodios.length;i+=this.totalPorPagina){
-      array.push(this.arrayEpisodios.slice(i,i+this.totalPorPagina));
-    }
-    return array;
+  filtrarEpisodios(){
+    this.servicio.textoObservable.subscribe(res =>{
+      console.log("texto",res);
+      this.arregloPaginado = this.servicio.filtrarPorTexto(this.episodios,res);
+    });
   }
-
 
    /*================================================*/
    inicioPagina(){

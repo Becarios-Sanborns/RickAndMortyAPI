@@ -12,15 +12,18 @@ export class UbicacionComponentComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUbicacionesAPI();
+    this.filtrarUbicacion();
   }
 
   titulosTabla = ['#','Name','Type','Created'];
-  arrayUbicaciones:any[] = [];
+  ubicaciones:any[] = [];
   arregloPaginado:any[] = [];
 
   paginaActual = 1;
   totalPorPagina = 5;
   paginasEnTotal = 0;
+
+  
 
   getUbicacionesAPI(){
     let detallesDeUbicacion;
@@ -34,19 +37,18 @@ export class UbicacionComponentComponent implements OnInit {
           dimention: response.dimension,
           created: response.created
         }
-          this.arrayUbicaciones.push(detallesDeUbicacion);
-          this.paginasEnTotal = Math.ceil(this.arrayUbicaciones.length/this.totalPorPagina);
-          this.arregloPaginado = this.segmentarArreglo();
+          this.ubicaciones.push(detallesDeUbicacion);
+          this.paginasEnTotal = Math.ceil(this.ubicaciones.length/this.totalPorPagina);
+          this.arregloPaginado = this.servicio.dividirArreglo(this.ubicaciones);
         });
     }
   }
 
-  segmentarArreglo(){
-    let array = [];
-    for(let i=0;i<this.arrayUbicaciones.length;i+=this.totalPorPagina){
-      array.push(this.arrayUbicaciones.slice(i,i+this.totalPorPagina));
-    }
-    return array;
+  filtrarUbicacion(){
+    this.servicio.textoObservable.subscribe(res =>{
+      console.log("textoU",res);
+      this.arregloPaginado = this.servicio.filtrarPorTexto(this.ubicaciones,res);
+    });
   }
 
   /*================================================*/

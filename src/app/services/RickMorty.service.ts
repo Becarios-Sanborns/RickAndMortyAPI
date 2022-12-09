@@ -41,5 +41,27 @@ export class RickMortyService {
     this.filtrarTexto.next(this.texto);
   }
 
+  dividirArreglo(arreglo:any[]){
+    let auxiliar:any = [];
+    for(let i=0;i<arreglo.length;i+=5){
+      auxiliar.push(arreglo.slice(i,i+5));
+    }
+    return auxiliar;
+  }
+
+  filtrarPorTexto(arreglo:any[],texto:string){
+    let auxiliar :any[] = [];
+    let auxiliarRegreso :any[] = [];
+
+    arreglo.forEach(objeto =>{
+      if(objeto.name.includes(texto)){
+        auxiliar.push(objeto);
+      }});
+
+    auxiliarRegreso = this.dividirArreglo(auxiliar);
+    console.log("Paginado",auxiliarRegreso);
+    return auxiliarRegreso;
+  }
+
 }
 

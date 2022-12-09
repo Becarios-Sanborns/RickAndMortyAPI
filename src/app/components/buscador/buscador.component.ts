@@ -32,14 +32,12 @@ export class BuscadorComponent implements OnInit {
 
   texto = "";
   txtIgnoreCase = "";
-  //@Output() enviarTexto = new EventEmitter <string>(); 
    
   filtrarPersonajes(ev:any){
     this.texto = ev.target.value;
     let mayuscula = this.texto.charAt(0).toUpperCase();
     this.txtIgnoreCase = this.texto.replace(this.texto.charAt(0),mayuscula);
 
-   // this.enviarTexto.emit(this.txtIgnoreCase);
     this.service.textoSet(this.txtIgnoreCase);
     
     /*for(let i=1;i<=50;i++){
