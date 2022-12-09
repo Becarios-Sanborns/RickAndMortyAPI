@@ -32,7 +32,7 @@ export class UbicacionComponentComponent implements OnInit {
       this.servicio.getUbicacion(i).subscribe(response =>{
         detallesDeUbicacion = {
           id: i,
-          name: response.name,
+          nombre: response.name,
           type: response.type,
           dimention: response.dimension,
           created: response.created

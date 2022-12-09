@@ -29,7 +29,7 @@ export class EpisodiosComponentComponent implements OnInit {
       this.servicio.getEpisodios(i).subscribe(response =>{
         detallesEpisodio = {
           id: i,
-          name: response.name,
+          nombre: response.name,
           episode: response.episode,
           airDate: response.air_date,
           personajes: response.characters.length

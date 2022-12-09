@@ -35,7 +35,7 @@ export class ListaComponent implements OnInit {
           caracteristicasPersonaje = {
             imagen: response.image,
             index: i,
-            name: response.name,
+            nombre: response.name,
             estado: response.status,
             especie: response.species,
             tipo: response.type

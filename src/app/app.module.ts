@@ -9,6 +9,9 @@ import { BuscadorComponent } from './components/buscador/buscador.component';
 import { AppRoutingModule } from './app-routing.module';
 import { UbicacionComponentComponent } from './components/ubicacion-component/ubicacion-component.component';
 import { EpisodiosComponentComponent } from './components/episodios-component/episodios-component.component';
+import { CardPersonajeComponent } from './components/card-personaje/card-personaje.component';
+import { CardEpisodioComponent } from './components/card-episodio/card-episodio.component';
+import { CardUbicacionComponent } from './components/card-ubicacion/card-ubicacion.component';
 
 
 @NgModule({
@@ -18,7 +21,10 @@ import { EpisodiosComponentComponent } from './components/episodios-component/ep
     ListaComponent,
     BuscadorComponent,
     UbicacionComponentComponent,
-    EpisodiosComponentComponent
+    EpisodiosComponentComponent,
+    CardPersonajeComponent,
+    CardEpisodioComponent,
+    CardUbicacionComponent
   ],
   imports: [
     BrowserModule,

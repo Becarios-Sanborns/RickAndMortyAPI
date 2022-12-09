@@ -54,7 +54,7 @@ export class RickMortyService {
     let auxiliarRegreso :any[] = [];
 
     arreglo.forEach(objeto =>{
-      if(objeto.name.includes(texto)){
+      if(objeto.nombre.includes(texto)){
         auxiliar.push(objeto);
       }});
 
